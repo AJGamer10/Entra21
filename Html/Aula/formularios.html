@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários</title>
+</head>
+<body>
+    <h1>Formulários</h1>
+    <form method="get" autocomplete="on">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" placeholder="example@email.com"><br>
+
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha"><br>
+
+        <button type="submit">Entrar</button>
+    </form>
+    <br><br>
+    <!-- query string: ?chave=valor&chave2=valor -->
+    <form action="https://www.google.com.br" method="get">
+        <label for="pesquisa">Valor de pesquisa</label>
+        <input type="text" name="q" id="pesquisa">
+        <input type="submit" value="Pesquisar">
+    </form>
+
+    <br><br>
+    <form method="post">
+        <label>
+            Data de nascimento
+            <input type="date" name="dataNascimento" min="1930-01-01" max="2023-09-25">
+        </label><br>
+
+        <label>
+            Hora de nascimento
+            <input type="time" name="horaNascimento">
+        </label><br>
+
+        <label>
+            Foto
+            <input type="file" name="foto" accept=".doc,.pdf">
+        </label><br><br>
+
+        <p>Escolha seu sexo;</p>
+        <label>
+            <input type="radio" name="sexo" value="masculino"> Masculino
+        </label>
+        <label>
+            <input type="radio" name="sexo" value="feminino"> Feminino
+        </label>
+        
+        <p>Selecione as linguagens que você conhece</p>
+        <label for="">
+            <input type="checkbox" name="c#"> C#
+        </label>
+        <label for="">
+            <input type="checkbox" name="java"> JAVA
+        </label>
+        <label for="">
+            <input type="checkbox" name="python"> Python
+        </label>
+
+
+        <fieldset>
+            <legend>Endereço</legend>
+            <p>Selecione o estado</p>
+            <label for="">
+                Estado
+                <select name="estado" id="">
+                    <option value="" selected disabled>Selecione uma opção</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                    <option value="EX">Estrangeiro</option>
+                </select>
+            </label>
+        </fieldset>
+        <label>
+            Informações Adicionais
+            <textarea name="infoAdicional" minlength="20" cols="30" rows="10" placeholder="digite aqui os detalhes..."></textarea>
+        </label>
+        <input type="reset" value="Limpar formulário">
+    </form>
+</body>
+</html>
