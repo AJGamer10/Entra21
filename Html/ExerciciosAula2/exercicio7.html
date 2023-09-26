@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Virtual</title>
+</head>
+<body>
+    <h1>Escola Virtual</h1>
+    <h2>Formulário de Pré-Matrícula</h2>
+    
+    <fieldset>
+        <legend>Dados pessoais:</legend>
+        <label>
+            Nome do aluno:
+            <input type="text" name="nomeAluno">
+        </label><br><br>
+
+        <label>
+            Nascimento
+            <input type="date" name="nascimento">
+        </label><br><br>
+
+        <label>
+            Nome da Mãe:
+            <input type="text" name="nomeMae">
+        </label><br><br>
+
+        <label>
+            Nome do Pai:
+            <input type="text" name="nomePai">
+        </label><br><br>
+
+        <label>
+            Telefone:
+            <input type="number" name="telefone">
+        </label><br><br>
+
+        
+    </fieldset>
+
+    <fieldset>
+        <legend>Informações da Matrícula</legend>
+        <label>
+            Série<br>
+            <select name="serie">
+                <option value="" selected disabled>Selecione uma opção</option>
+                <option value="M">Maternal</option>
+                <option value="PE">Pré-Escola</option>
+                <option value="1ano">1º ano</option>
+                <option value="2ano">2º ano</option>
+                <option value="3ano">3º ano</option>
+                <option value="4ano">4º ano</option>
+                <option value="5ano">5º ano</option>
+                <option value="6ano">6º ano</option>
+                <option value="7ano">7º ano</option>
+                <option value="8ano">8º ano</option>
+                <option value="9ano">9º ano</option>
+                <option value="1serie">1ª serie</option>
+                <option value="2serie">2ª serie</option>
+                <option value="3serie">3ª serie</option>
+            </select>
+        </label><br><br>
+
+        <label>
+            Turno:<br>
+            <input type="radio" name="manha"> Manhã
+            <input type="radio" name="tarde"> Tarde
+        </label><br><br>
+        <label>
+            Atividades Extracurriculares: <br><br>
+            <input type="checkbox" name="informatica"> Informatica <br>
+            <input type="checkbox" name="musica"> Música <br>
+            <input type="checkbox" name="balet"> Balet <br>
+            <input type="checkbox" name="pintura"> Pintura <br>
+            <input type="checkbox" name="judo"> Judô <br>
+            <input type="checkbox" name="futebol"> Futebol <br>
+        </label>
+    </fieldset>
+    <button type="submit">Envia Formulário</button>
+    <button type="reset">Limpa Campos</button>
+</body>
+</html>
