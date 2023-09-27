@@ -98,12 +98,13 @@
         .sidebar a {
             color: white;
             text-decoration: none;
-            display: block;
+            float: right;
             margin-bottom: 10px;
         }
+
         footer {
             background-color: #333;
-            text-decoration-color: white;
+            color: white;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
@@ -114,7 +115,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="../Aula/img/logo.png" width="100" id="logo" alt="Logo OrbitTech">
+            <img src="../../Aula/img/logo.png" width="100" id="logo" alt="Logo OrbitTech">
             <h1>OrbitTech</h1>
         </div>
     </header>
@@ -125,7 +126,7 @@
             <li><a href="https://www.google.com.br/">Google</a></li>
             <li><a href="https://github.com/AJGamer10/VSCode">GitHub</a></li>
             <li><a href="https://store.steampowered.com/">Steam</a></li>
-            <li><a href="https://www.youtube.com/">YouTube</a></li>
+            <li><a href="video.html">Video</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
     </nav>
@@ -154,6 +155,19 @@
                 facere velit cum, cumque rerum, libero assumenda vero repellat perferendis
                 nisi ipsam!</p>
         </article>
+        <audio controls>
+            <source src="musica.mp3" type="audio/mp3">
+            Musica não suportada
+        </audio>
+        <video width="300" height="400" controls>
+            <source src="video.mp4" type="video/mp4">
+            Video não suportado
+        </video><br>
+        <picture>
+            <source media="(min-width: 1500px)" srcset="Meu OC.jpg">
+            <source media="(min-width: 1000px)" srcset="sonic.jpg">
+            <img src="3.png">
+        </picture>
     </main>
     <aside class="sidebar">
         <h3>Sidebar</h3>
@@ -190,8 +204,8 @@
 
     </section>
     <footer>
-        &copy; Copyright 2020 - 2023 <br>
-        <p>Contato: 49 9 9170-0435</p>
+        &copy; Copyright 2020 - 2023 <br><br>
+        <a href="contato.html">Contato</a><br>
         <a href="https://www.instagram.com/abner_juda/">Instagram</a>
     </footer>
 </body>
