@@ -6,16 +6,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrbitTech Blog</title>
     <style>
+        body {
+            background-color: rgb(231, 231, 231);
+            font-family: Arial, sans-serif;
+        }
+
+        .logo,
+        h1 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .artigo {
+            margin: 40px;
+            color: white;
+        }
+
+        main {
+            border-radius: 10px;
+            background-color: rgb(87, 87, 87);
+            padding: 20px;
+            align-self: left;
+            width: 69%;
+        }
+
+        nav {
+            background-color: rgb(0, 82, 3);
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: lightgreen;
+        }
+
+        .faq-section {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            margin-bottom: 20px;
+        }
+
+        nav ul li:last-child a {
+            background-color: #FFA500;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li:last-child a:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .sidebar {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 25%;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <img src="../Aula/img/logo.png" width="100" id="logo" alt="Logo OrbitTech">
+        <div class="logo">
+            <img src="../Aula/img/logo.png" width="100" id="logo" alt="Logo OrbitTech">
+            <h1>OrbitTech</h1>
+        </div>
     </header>
-    <section>
+
+    <nav>
+        <ul>
+            <li><a href="https://www.sonicthehedgehog.com/">Sonic</a></li>
+            <li><a href="https://www.google.com.br/">Google</a></li>
+            <li><a href="https://github.com/AJGamer10/VSCode">GitHub</a></li>
+            <li><a href="https://store.steampowered.com/">Steam</a></li>
+            <li><a href="https://www.youtube.com/">YouTube</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <article class="artigo">
+            <h2>Artigo 1</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus dolorem sed
+                asperiores voluptatibus molestias similique consequatur distinctio illo
+                facere velit cum, cumque rerum, libero assumenda vero repellat perferendis
+                nisi ipsam!</p>
+        </article>
+
+        <article class="artigo">
+            <h2>Artigo 2</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus dolorem sed
+                asperiores voluptatibus molestias similique consequatur distinctio illo
+                facere velit cum, cumque rerum, libero assumenda vero repellat perferendis
+                nisi ipsam!</p>
+        </article>
+
+        <article class="artigo">
+            <h2>Artigo 3</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus dolorem sed
+                asperiores voluptatibus molestias similique consequatur distinctio illo
+                facere velit cum, cumque rerum, libero assumenda vero repellat perferendis
+                nisi ipsam!</p>
+        </article>
+    </main>
+    <aside class="sidebar">
+        <h3>Sidebar</h3>
+        <a href="#faq">Perguntas Frequentes</a>
+        <a href="https://www.example.com/">Link Externo</a>
+        <a href="#">Inicio</a>
+    </aside>
+    <section id="faq" class="faq-section">
+        <h2>Perguntas Frequentes</h2>
+
+        <div class="faq-question">
+            <p>1. Como posso fazer uma pergunta?</p>
+        </div>
+        <div class="faq-answer">
+            <p>Para fazer uma pergunta, clique no botão "Fazer Pergunta" na página inicial e preencha o formulário com
+                sua pergunta.</p>
+        </div>
+
+        <div class="faq-question">
+            <p>2. Posso editar minha pergunta após publicá-la?</p>
+        </div>
+        <div class="faq-answer">
+            <p>Sim, você pode editar sua pergunta a qualquer momento. Basta acessar sua pergunta e clicar no botão de
+                edição.</p>
+        </div>
+
+        <div class="faq-question">
+            <p>3. Como faço para excluir minha conta?</p>
+        </div>
+        <div class="faq-answer">
+            <p>Para excluir sua conta, vá para as configurações da sua conta e clique na opção "Excluir Conta". Siga as
+                instruções para confirmar a exclusão.</p>
+        </div>
 
     </section>
+    <footer>
+        &copy; Copyright 2020 - 2023 <br>
+        <p>Contato: 49 9 9170-0435</p>
+        <a href="https://www.instagram.com/abner_juda/">Instagram</a>
+    </footer>
 </body>
 
 </html>
