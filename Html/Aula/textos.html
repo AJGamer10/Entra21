@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+        @font-face {
+            font-family: "FiraSans";
+            src: url(static/font/FiraSans-Black.ttf);
+            src: url(static/font/FiraSans-BlackItalic.ttf);
+            src: url(static/font/FiraSans-Bold.ttf);
+            src: url(static/font/FiraSans-BoldItalic.ttf);
+            src: url(static/font/FiraSans-ExtraBold.ttf);
+            src: url(static/font/FiraSans-ExtraBoldItalic.ttf);
+            src: url(static/font/FiraSans-ExtraLight.ttf);
+            src: url(static/font/FiraSans-ExtraLightItalic.ttf);
+            src: url(static/font/FiraSans-Italic.ttf);
+            src: url(static/font/FiraSans-LightItalic.ttf);
+        }
+
+        @font-face {
+            font-family: "FiraSans";
+            src: url(static/font/FiraSans-Black.ttf);
+            src: url(static/font/FiraSans-BlackItalic.ttf);
+            src: url(static/font/FiraSans-Bold.ttf);
+            src: url(static/font/FiraSans-BoldItalic.ttf);
+            src: url(static/font/FiraSans-ExtraBold.ttf);
+            src: url(static/font/FiraSans-ExtraBoldItalic.ttf);
+            src: url(static/font/FiraSans-ExtraLight.ttf);
+            src: url(static/font/FiraSans-ExtraLightItalic.ttf);
+            src: url(static/font/FiraSans-Italic.ttf);
+            src: url(static/font/FiraSans-LightItalic.ttf);
+        }
+
+        .text-align-right {
+            text-align: right;
+        }
+
+        .text-align-center {
+            text-align: center;
+        }
+
+        .text-decoration-overline {
+            text-decoration: overline;
+        }
+
+        .text-decoration-underline {
+            text-decoration: underline;
+        }
+
+        .text-decoration-none {
+            text-decoration: none;
+            color: #050505;
+        }
+
+        .text-transform-uppercase {
+            text-transform: uppercase;
+        }
+
+        .text-indent {
+            text-indent: 50px;
+        }
+
+        .letter-spacing {
+            letter-spacing: 5px;
+            line-height: 1.5;
+        }
+
+        .line-height {
+            line-height: 1.5;
+        }
+
+        .text-shadow {
+            text-shadow: 10px 20px 20px #ff0000, 0 0 5px #0000ff;
+        }
+
+        .google-font {
+            font-family: 'Dancing Script', cursive;
+            font-size: 44px;
+        }
+
+        .installed-font {
+            font-family: "FiraSans", Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        .text-overflow {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            text-overflow: ellipsis;
+            overflow: clip;
+            /* white-space: nowrap; */
+        }
+
+        .columns {
+            column-count: 2;
+            column-gap: 4px;
+            column-rule-style: solid;
+            column-rule-width: 1px;
+        }
+
+        .writing-mode {
+            writing-mode: vertical-rl;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Estilos em Textos</h1>
+
+    <h2>Alinhamentos</h2>
+    <p class="text-align-right">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora impedit ex natus, cumque ab nihil eaque
+        dolores velit nostrum aut deleniti provident iste culpa ratione veniam perferendis architecto eveniet
+        blanditiis.
+    </p>
+    <p class="text-align-center">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta magni explicabo dolore quae, ipsum adipisci
+        obcaecati asperiores, optio quos modi perspiciatis, iure velit totam earum suscipit aut! Libero, possimus quam!
+    </p>
+    <div class="text-align-center text-decoration-underline">
+        <h2>Testando text-align</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti tempora sint voluptas soluta enim maxime
+            velit corporis. Natus blanditiis earum rem velit nobis quis voluptates sapiente quae repellendus! Culpa,
+            soluta.
+        </p>
+
+    </div>
+
+    <h2>Text decoration</h2>
+    <p>
+        <span class="text-decoration-overline">Lorem</span> ipsum <span class="text-decoration-underline">dolor</span>
+        sit amet consectetur adipisicing elit. Hic debitis omnis fuga est fugiat consectetur perferendis praesentium
+        maiores eius? Accusantium, delectus quisquam minus architecto perspiciatis similique porro voluptates esse unde!
+    </p>
+    <a href="#" class="text-decoration-none">Qualquer coisa</a>
+
+    <h2>Text Transform</h2>
+    <p class="text-transform-uppercase">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio, quae, quibusdam
+        cum numquam corrupti aliquam officia quasi vero provident eveniet iure quis cupiditate in perspiciatis hic
+        labore! Perferendis, consequatur fugit.</p>
+
+    <h2>Text space</h2>
+    <p class="text-indent letter-spacing line-height">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nesciunt illo ipsa sunt porro autem corrupti
+        quisquam sequi nostrum eligendi quo ad sit omnis voluptates error laborum, consequuntur asperiores voluptatem?
+    </p>
+
+    <h2 class="text-shadow">Text Shadow</h2>
+
+    <h2>Font Family e Font Weight</h2>
+    <p class="google-font">Fonte do google</p>
+    <p class="installed-font">Fonte instalada</p>
+
+    <h2>Text Overflow</h2>
+    <p class="text-overflow">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+
+    <h2>Colunas</h2>
+    <p class="columns">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi modi sequi nostrum aperiam eveniet. Debitis amet
+        aperiam eligendi recusandae perspiciatis repudiandae. Recusandae eius reiciendis blanditiis, nam eum numquam
+        animi fuga.</p>
+    <p class="columns">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus omnis quasi vero quae vel aperiam
+        culpa adipisci deleniti, unde, quibusdam minus suscipit cumque perspiciatis accusantium cupiditate consectetur,
+        aliquid earum?</p>
+
+    <h2>Writing mode</h2>
+    <p class="writing-mode">Lorem ipsum dolor, sit amet consectetur adipisicing elit</p>
+
+</body>
+
+</html>
