@@ -9,14 +9,26 @@ $(document).ready(() => {
 
     const $tableBody = $("#peopleTable tbody");
 
-    people.forEach(person => {
-        $tableBody.append(
-            '<tr>' +
-            '<td>' + person.id + '</td>' +
-            '<td>' + person.name + '</td>' +
-            '<td>' + person.age + '</td>' +
-            '<td>' + (person.sex === "F" ? "Feminino" : "Masculino") + '</td>' +
-            '</tr>'
+    /**
+     * Formatação do sexo da pessoa
+     * @param {string} sex - Sexo da pessoa
+     * @returns Sexo formatado
+     */
+    const formatSex = sex => sex === "F" ? "Feminino" : "Masculino"
+
+    // Criando linhas com os dados
+    $.each(people, (_, person) => {
+        // Criando a linha com dados da pessoa
+        const $row = $(
+            `<tr>
+            <td>${person.id}</td>
+            <td>${person.name}</td>
+            <td>${person.age}</td>
+            <td>${formatSex(person.sex)}</td>
+            </tr>`
         )
+
+        // Inserir a linha na tabela
+        $tableBody.append($row)
     })
 });
