@@ -8,9 +8,10 @@ notas. Essa classe deve conter os seguintes métodos:
         7 à 10 - Aprovado
 """
 
+
 class Aluno:
     """Aluno representa um aluno de uma escola.
-    
+
     Attributes:
         numero_matricula (str): Número de matrícula do aluno
         nome (str): Nome do aluno
@@ -24,25 +25,25 @@ class Aluno:
 
     def __str__(self):
         return f"Nome: {self.nome} | Número de matrícula: {self.numero_matricula} | Notas: {self.notas}"
-    
-    def get_media(selfm, notas: list) -> float:
+
+    def get_media(self, notas: list) -> float:
         """Calcula a média do aluno com base nas notas.
         Args:
             nome (str): Nome do aluno
             notas (list): Notas do aluno
-        
+
         Returns:
             Media do aluno com base nas notas
         """
         media = sum(notas) / len(notas)
         return media
-    
+
     def get_situacao(self, nome: str, numero_matricula: str, notas: list) -> str:
         """Informa a situação do aluno com base no critérios:
         0 à 4 - Reprovado
         5 à 6 - Recuperação
         7 à 10 - Aprovado
-        
+
         Args:
             nome (str): Nome do aluno
             numero_matricula (str): Número de matrícula do aluno
@@ -56,26 +57,29 @@ class Aluno:
 
         if media <= 4:
             return 'Reprovado'
-        
+
         if 5 <= media <= 6:
             return 'Recuperação'
-        
+
         if media >= 7:
             return 'Aprovado'
-        
+
 
 if __name__ == '__main__':
     abner = Aluno("4547084881", "Abner Eger", [10, 9, 9.5])
     print(abner)
     print(f'Média do aluno: {abner.get_media(abner.notas)}')
-    print(f'Situação do aluno: {abner.get_situacao(abner.nome, abner.numero_matricula, abner.notas)}')
+    print(f'Situação do aluno: {abner.get_situacao(
+        abner.nome, abner.numero_matricula, abner.notas)}')
 
     ricardo = Aluno("4547083881", "Ricardo Araujo", [5, 7, 6])
     print(ricardo)
     print(f'Média do aluno: {ricardo.get_media(ricardo.notas)}')
-    print(f'Situação do aluno: {ricardo.get_situacao(ricardo.nome, ricardo.numero_matricula, ricardo.notas)}')
+    print(f'Situação do aluno: {ricardo.get_situacao(
+        ricardo.nome, ricardo.numero_matricula, ricardo.notas)}')
 
     eduardo = Aluno("4547083861", "Eduardo Silva", [2, 3, 1])
     print(eduardo)
     print(f'Média do aluno: {eduardo.get_media(eduardo.notas)}')
-    print(f'Situação do aluno: {eduardo.get_situacao(eduardo.nome, eduardo.numero_matricula, eduardo.notas)}')
+    print(f'Situação do aluno: {eduardo.get_situacao(
+        eduardo.nome, eduardo.numero_matricula, eduardo.notas)}')
