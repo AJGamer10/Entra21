@@ -19,50 +19,46 @@ class Aluno:
     """
 
     def __init__(self, nome: str, numero_matricula: str, notas: list) -> None:
-        self.numero_matricula = numero_matricula
+        self.__numero_matricula = numero_matricula
         self.nome = nome
         self.notas = notas
 
     def __str__(self):
         return f"Nome: {self.nome} | Número de matrícula: {self.numero_matricula} | Notas: {self.notas}"
 
-    def get_media(self, notas: list) -> float:
+    @property
+    def numero_matricula(self):
+        """(int): Número da matricula do aluno"""
+        return self.__numero_matricula
+
+    def get_media(self) -> float:
         """Calcula a média do aluno com base nas notas.
-        Args:
-            nome (str): Nome do aluno
-            notas (list): Notas do aluno
 
         Returns:
             Media do aluno com base nas notas
         """
-        media = sum(notas) / len(notas)
-        return media
+        return sum(self.notas) / len(self.notas)
 
-    def get_situacao(self, nome: str, numero_matricula: str, notas: list) -> str:
+    def get_situacao(self) -> str:
         """Informa a situação do aluno com base no critérios:
         0 à 4 - Reprovado
         5 à 6 - Recuperação
         7 à 10 - Aprovado
-
-        Args:
-            nome (str): Nome do aluno
-            numero_matricula (str): Número de matrícula do aluno
 
         Returns:
             Reprovado se a média for menor ou igual 4
             Recuperação se a média estiver entre 5 á 6
             Aprovado se a média for maior ou igual 7
         """
-        media = self.get_media(notas)
+        media = self.get_media()
 
-        if media <= 4:
+        if 0 <= media <= 4:
             return 'Reprovado'
 
         if 5 <= media <= 6:
             return 'Recuperação'
 
-        if media >= 7:
-            return 'Aprovado'
+        return 'Aprovado'
 
 
 if __name__ == '__main__':
