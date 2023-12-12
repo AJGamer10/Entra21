@@ -9,7 +9,7 @@ from __future__ import annotations
 
 
 class Ponto2D:
-    """Representa um ponto no espaço cartesiano.
+    """Representa um ponto com duas dimensões no espaço.
     
     Attributes:
         x (int): Eixo das abscissas.
@@ -22,7 +22,7 @@ class Ponto2D:
     
     @staticmethod
     def tem_eixo_comum(ponto_a: Ponto2D, ponto_b: Ponto2D) -> bool:
-        """Verifica se tem algum eixo em comum entre esses dois pontos.
+        """Verifica se tem algum eixo em comum entre dois pontos.
         
         Args:
             ponto_a (Ponto2D): Primeiro ponto.

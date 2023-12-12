@@ -15,7 +15,11 @@ class Agenda:
 
     def __init__(self, nome: str):
         self.nome = nome
-        self.pessoas = []
+        self.__pessoas = []
+
+    @property
+    def pessoas(self):
+        """(List[Pessoa]): Lista de pessoas na agenda."""
 
     def adicionar_pessoa(self, nome: str, telefone: str) -> None:
         """Adiciona uma pessoa na agenda.
@@ -24,9 +28,11 @@ class Agenda:
             nome (str): Nome da pessoa.
             telefone (str): Número de telefone da pessoa.
         """
-        if len(self.pessoas) < 10:
-            self.pessoas.append(Pessoa(nome, telefone))
+        if len(self.__pessoas) < 10:
+            self.__pessoas.append(Pessoa(nome, telefone))
             print(f"{nome} adicionado(a) com sucesso!")
+        else:
+            print('Agenda lotada')
     
     def remover_pessoa(self, nome: str) -> None:
         """Remove uma pessoa pelo nome da agenda.
@@ -34,10 +40,13 @@ class Agenda:
         Args:
             nome (str): Nome da pessoa.
         """
-        for pessoa in self.pessoas:
+        for pessoa in self.__pessoas:
             if pessoa.nome == nome:
-                self.pessoas.remove(pessoa)
+                self.__pessoas.remove(pessoa)
                 print(f"{pessoa.nome} removido(a) com sucesso!")
+                return
+        
+        print('Pessoa não encontrada na agenda')
 
     def buscar_pessoa(self, nome: str):
         """Busca uma pessoa pelo nome na agenda (Mostra todas as informações da pessoa encontrada).
@@ -47,7 +56,7 @@ class Agenda:
         """
         print('=====================')
         print('Esses foram os resultados encontrados: \n')
-        for pessoa in self.pessoas:
+        for pessoa in self.__pessoas:
             if pessoa.nome.lower()[0: len(nome)] == nome.lower():
                 print(f'Nome: {pessoa.nome} | Telefone: {pessoa.telefone}')
         print('=====================')
@@ -55,7 +64,7 @@ class Agenda:
     def listar_pessoas(self):
         """Mostra as informações de todas as pessoas da agenda."""
         print('=====================')
-        for pessoa in self.pessoas:
+        for pessoa in self.__pessoas:
             print(f'Nome: {pessoa.nome} | Telefone: {pessoa.telefone}')
         print('=====================')
 

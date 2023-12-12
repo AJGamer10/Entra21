@@ -37,6 +37,8 @@ class Aluno:
         Returns:
             Media do aluno com base nas notas
         """
+        if not self.notas:
+            return 0
         return sum(self.notas) / len(self.notas)
 
     def get_situacao(self) -> str:
