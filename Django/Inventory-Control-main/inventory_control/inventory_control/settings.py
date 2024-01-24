@@ -134,6 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
+# File config
 MEDIA_ROOT = BASE_DIR / 'media'
-
 MEDIA_URL = "media/"

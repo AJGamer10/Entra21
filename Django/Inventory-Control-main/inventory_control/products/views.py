@@ -13,8 +13,7 @@ def index(request):
     products = Product.objects.order_by("-id")
     
     # Aplicando a paginação
-    paginator = Paginator(products, 100)
-    # /fornecedores?page=1 -> Obtendo a página da URL
+    paginator = Paginator(products, 2)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
@@ -33,11 +32,10 @@ def search(request):
     # Filtrando os fornecedores
     # O Q é usado para combinar filtros (& ou |)
     products = Product.objects \
-        .filter(Q(fantasy_name__icontains=search_value) |
-                Q(company_name__icontains=search_value)) \
+        .filter(Q(name__icontains=search_value)) \
         .order_by("-id")
 
-    paginator = Paginator(products, 100)
+    paginator = Paginator(products, 2)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

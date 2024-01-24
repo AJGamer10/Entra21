@@ -6,7 +6,7 @@
 {% endblock %}
 {% block head %}
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-<script src="{% static 'products/js/index.js' %}"></script>
+<script src="{% static 'base/js/index.js' %}"></script>
 {% endblock %}
 {% block content %}
   <h1>Produtos</h1>
@@ -34,11 +34,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Preço de Venda</th>
-          <th>Está a venda</th>
           <th>Foto</th>
+          <th>Nome</th>
+          <th>Preço de Venda</th>
+          <th>Data de expiração</th>
           <th>Ativo</th>
           <th>Ações</th>
         </tr>
@@ -47,17 +46,22 @@
         {% for product in products %}
           <tr>
             <td>{{ product.id }}</td>
-            <td>{{ product.name|title }}</td>
-            <td>{{ product.description }}</td>
+            <td>
+              {% if product.thumbnail %}
+                <img src="{{ product.photo.url }}" height="30" width="30" alt="{{ product.name }}" class="img-fluid">
+              {% else %}
+                Sem foto
+              {% endif %}
+            </td>
+            <td>{{ product.name|title|truncatechars:20 }}</td>
             <td>{{ product.sale_price|format_sale_price }}</td>
             <td>
               {% if product.is_perishable %}
-                Sim
+                {{ product.expiration_date|date:"d/m/Y" }}
               {% else %}
-                Não
+                Não perecível
               {% endif %}
             </td>
-            <td><img src="{{ product.photo.url }}" alt="foto-do-produto-{{ product.id }}" style="height: 32px;"></td>
             <td>
               <input {% if product.enabled %}checked{% endif %} data-url="{% url 'products:toggle_enabled' product.id %}" type="checkbox" class="form-check-input" />
             </td>
@@ -76,6 +80,7 @@
         {% endfor %}
       </tbody>
     </table>
+
     {% if products.paginator.num_pages > 1 %}
       <nav aria-label="Paginação da página">
         <ul class="pagination justify-content-end">

@@ -13,7 +13,7 @@ def index(request):
     suppliers = Supplier.objects.order_by("-id")
     
     # Aplicando a paginação
-    paginator = Paginator(suppliers, 100)
+    paginator = Paginator(suppliers, 2)
     # /fornecedores?page=1 -> Obtendo a página da URL
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
