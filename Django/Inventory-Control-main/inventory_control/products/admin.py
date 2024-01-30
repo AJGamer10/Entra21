@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, Category, SupplierProduct
 
 # Register your models here.
 @admin.register(Product)
@@ -9,6 +9,20 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ["name"]
     list_display_links = ["name"]
     list_editable = ["sale_price", "expiration_date", "enabled"]
-    list_filter = ["enabled"]
+    list_per_page = 100
+    list_max_show_all = 1000
+    
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["id", "name"]
+    search_fields = ["name"]
+    list_display_links = ["name"]
+    list_per_page = 100
+    list_max_show_all = 1000
+    
+@admin.register(SupplierProduct)
+class SupplierProductAdmin(admin.ModelAdmin):
+    list_display = ["id", "product", "supplier", "cost_price"]
+    search_fields = ["product"]
     list_per_page = 100
     list_max_show_all = 1000
