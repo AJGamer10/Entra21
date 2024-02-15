@@ -1,11 +1,12 @@
 jQuery(function() {
-    const $addButton = $("#addSupplierButton");
+    // Supplier form add and delete buttons
+    const $addSupplierButton = $("#addSupplierButton");
     const $suppliersContainer = $("#supplierFormset");
     const $totalSuppliers = $("#id_supplierproduct_set-TOTAL_FORMS");
 
     const $originalSupplier = $suppliersContainer.children(".row:first").clone(true);
 
-    $addButton.on("click", function() {
+    $addSupplierButton.on("click", function() {
         const $newRow = $originalSupplier.clone(true);
         const index = parseInt($totalSuppliers.val());
 
@@ -25,5 +26,23 @@ jQuery(function() {
 
         $button.closest(".row").remove();
         $totalSuppliers.val(parseInt($totalSuppliers.val()) - 1);
-    })
-})
+
+        const url = $button.data("url");
+        if (url) {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": Cookies.get("csrftoken")
+                }
+            })
+            .catch(console.error);
+        }
+    });
+
+    // Inventory form add and delete buttons
+    const $addInventoryButton = $("#addInventoryButton");
+    const $inventoryContainer = $("#inventoryFormset");
+    const $totalInventories = $("#id_productinventory_set-TOTAL_FORMS");
+
+    const $originalInventory = $()
+});

@@ -6,23 +6,29 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_POST, require_GET
+from django.contrib.auth.decorators import login_required
 
-from .forms import CategoryForm, ProductForm, SupplierProductFormSet
-from .models import Category, Product, SupplierProduct
+from .forms import CategoryForm, ProductForm, SupplierProductFormSet, ProductInventoryFormSet
+from .models import Category, Product, SupplierProduct, ProductInventory
 
-
+@login_required
 def index(request):
     products = Product.objects.order_by("-id")
+    product_inventory = ProductInventory.objects.order_by("-id")
         
     # Aplicando a paginação
     paginator = Paginator(products, 2)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    context = { "products": page_obj }
+    context = { 
+        "products": page_obj,
+        "product_inventory": product_inventory,
+    }
     
     return render(request, "products/index.html", context)
 
+@login_required
 def search(request):
     # Obtendo o valor da requisição (Formulário)
     search_value = request.GET.get("q").strip()
@@ -46,6 +52,7 @@ def search(request):
     
     return render(request, "products/index.html", context)
 
+@login_required
 def create(request):
     form_action = reverse("products:create")
     # POST
@@ -56,6 +63,7 @@ def create(request):
             product = form.save()
             
             supplier_product_formset = SupplierProductFormSet(request.POST, instance=product)
+            product_inventory_formset = ProductInventoryFormSet(request.POST, instance=product)
             
             if supplier_product_formset.is_valid():
                 supplier_product_formset.save()
@@ -65,8 +73,33 @@ def create(request):
                 product.delete()
                 
                 supplier_product_formset = SupplierProductFormSet(request.POST)
+                product_inventory_formset = ProductInventoryFormSet(request.POST, instance=product)
                 
-                context = { "form": form, "supplier_product_formset": supplier_product_formset, "form_action": form_action }
+                context = {
+                    "form": form,
+                    "supplier_product_formset": supplier_product_formset,
+                    "product_inventory_formset": product_inventory_formset,
+                    "form_action": form_action
+                }
+                
+                return render(request, "products/create.html", context)
+            
+            if product_inventory_formset.is_valid():
+                product_inventory_formset.save()
+                messages.success(request, "O produto foi cadastrado com sucesso!")
+            else:
+                messages.error(request, "Falha ao cadastrar os estoques do produto")
+                product.delete()
+                
+                supplier_product_formset = SupplierProductFormSet(request.POST)
+                product_inventory_formset = ProductInventoryFormSet(request.POST)
+                
+                context = { 
+                    "form": form, 
+                    "supplier_product_formset": supplier_product_formset,
+                    "product_inventory_formset": product_inventory_formset,
+                    "form_action": form_action
+                }
                 
                 return render(request, "products/create.html", context)
             
@@ -75,64 +108,93 @@ def create(request):
         messages.error(request, "Falha ao cadastrar o produto. Verifique o preenchimento dos campos.")
         
         supplier_product_formset = SupplierProductFormSet(request.POST)
+        product_inventory_formset = ProductInventoryFormSet(request.POST)
         
-        context = { "form": form, "supplier_product_formset": supplier_product_formset, "form_action": form_action }
+        context = { 
+            "form": form, 
+            "supplier_product_formset": supplier_product_formset,
+            "product_inventory_formset": product_inventory_formset,
+            "form_action": form_action
+        }
         
         return render(request, "products/create.html", context)
     
     # GET
     form = ProductForm()
     supplier_product_formset = SupplierProductFormSet()
+    product_inventory_formset = ProductInventoryFormSet()
     
-    context = { "form": form, "supplier_product_formset": supplier_product_formset, "form_action": form_action }
-    
-    return render(request, "products/create.html", context)
-
-def update(request, slug):
-    product = get_object_or_404(Product, slug=slug)
-    form_action = reverse("products:update", args=(slug,)) # Obtendo a URL da rota de atualização
-    
-    # POST
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        supplier_product_formset = SupplierProductFormSet(request.POST, instance=product)
-        
-        if form.is_valid():
-            try:
-                if form.cleaned_data["photo"] is False:
-                    product.thumbnail.delete(save=False)
-                
-                form.save()
-            
-                if supplier_product_formset.is_valid():
-                    supplier_product_formset.save()                            
-                    messages.success(request, "O produto foi atualizado com sucesso!")
-                    return redirect("products:index")
-                else:
-                    messages.error(request, "Não é possível atualizar o produto. Verifique os campos de fornecedor")
-            except IntegrityError:
-                messages.error(request, "Não é possível cadastrar o mesmo fornecedor para o mesmo produto")
-        
-        context = {
-            "form_action": form_action,
-            "supplier_product_formset": supplier_product_formset,
-            "form": form
-        }
-        
-        return render(request, "products/create.html", context)
-    
-    # GET
-    form = ProductForm(instance=product)
-    supplier_product_formset = SupplierProductFormSet(instance=product)
-    
-    context = {
-        "form_action": form_action,
+    context = { 
+        "form": form, 
         "supplier_product_formset": supplier_product_formset,
-        "form": form,
+        "product_inventory_formset": product_inventory_formset,
+        "form_action": form_action
     }
     
     return render(request, "products/create.html", context)
 
+@login_required
+def update(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    form_action = reverse("products:update", args=(slug,))
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        supplier_product_formset = SupplierProductFormSet(request.POST, instance=product)
+
+        if form.is_valid():
+            try:
+                if form.cleaned_data["photo"] is False:
+                    product.thumbnail.delete(save=False)
+
+                form.save()
+
+                if supplier_product_formset.is_valid():
+                    supplier_product_formset.save()
+                    messages.success(request, "Produto atualizado com sucesso")
+                    return redirect("products:index")
+                else:
+                    messages.error(
+                        request, "Falha ao atualizar o produto - Formulário de fornecedores inválido.")
+
+            except IntegrityError:
+                messages.error(
+                    request, "Falha ao atualizar o produto - Não é possível ter o mesmo fornecedor para o mesmo produto mais de uma vez.")
+        else:
+            messages.error(
+                request, "Falha ao atualizar o produto - Formulário inválido.")
+        
+        
+        supplier_product_formset = SupplierProductFormSet(instance=product)
+        context = {
+            "form_action": form_action,
+            "form": form,
+            "supplier_product_formset": supplier_product_formset
+        }
+        
+        return render(request, "products/create.html", context)
+
+
+    form = ProductForm(instance=product)
+    supplier_product_formset = SupplierProductFormSet(instance=product)
+
+    context = {
+        "form_action": form_action,
+        "form": form,
+        "supplier_product_formset": supplier_product_formset
+    }
+
+    return render(request, "products/create.html", context)
+
+@login_required
+@require_POST
+def delete_supplier_from_product(request, id):
+    supplier_product = get_object_or_404(SupplierProduct, pk=id)
+    supplier_product.delete()
+    
+    return JsonResponse({ "message": "success" })
+
+@login_required
 @require_POST
 def delete(request, id):
     product = get_object_or_404(Product, pk=id)
@@ -140,6 +202,7 @@ def delete(request, id):
     
     return redirect("products:index")
 
+@login_required
 @require_POST
 def toggle_enabled(request, id):
     product = get_object_or_404(Product, pk=id)
@@ -151,6 +214,7 @@ def toggle_enabled(request, id):
 
 
 # Categorias
+@login_required
 def get_categories(request):
     categories = Category.objects.order_by("-id")
         
@@ -163,6 +227,7 @@ def get_categories(request):
     
     return render(request, "categories/index.html", context)
 
+@login_required
 def search_categories(request):
     # Obtendo o valor da requisição (Formulário)
     search_value = request.GET.get("q").strip()
@@ -186,6 +251,7 @@ def search_categories(request):
     
     return render(request, "categories/index.html", context)
 
+@login_required
 def create_category(request):
     form_action = reverse("products:category_create")
     # POST
@@ -212,6 +278,7 @@ def create_category(request):
     
     return render(request, "categories/create.html", context)
 
+@login_required
 def update_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     form_action = reverse("products:category_update", args=(slug,)) # Obtendo a URL da rota de atualização
@@ -242,6 +309,7 @@ def update_category(request, slug):
     
     return render(request, "categories/create.html", context)
 
+@login_required
 @require_POST
 def delete_category(request, id):
     category = get_object_or_404(Category, pk=id)
@@ -249,6 +317,7 @@ def delete_category(request, id):
     
     return redirect("products:categories")
 
+@login_required
 @require_GET
 def get_suppliers_from_product(request, id):
     suppliers = SupplierProduct.objects.filter(product__id=id).order_by("-id")

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       iStock -{% block title %}
+
       {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}" />
@@ -17,6 +18,7 @@
     <script src="{% static 'base/js/base.js' %}"></script>
 
     {% block head %}
+
     {% endblock %}
   </head>
   <body>
@@ -24,19 +26,17 @@
       <!-- Then put toasts within -->
 
       {% for message in messages %}
-      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <strong class="me-auto">Notificação</strong>
-          <small class="text-body-secondary">agora</small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Notificação</strong>
+            <small class="text-body-secondary">agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">{{ message }}</div>
         </div>
-        <div class="toast-body">
-            {{message}}
-        </div>
-      </div>
       {% endfor %}
     </div>
-    
+
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 d-none d-md-flex flex-column bg-light sidebar flex-shrink-0">
@@ -64,14 +64,23 @@
                 Categorias
               </a>
             </li>
+            <li>
+              <a href="{% url 'users:index' %}" class="nav-link link-dark">
+                <i class="bi bi-people"></i>
+                Usuários
+              </a>
+            </li>
           </ul>
           <hr />
           <ul class="nav nav-pills">
             <li>
-              <a href="#" class="nav-link link-dark">
-                <i class="bi bi-box-arrow-left"></i>
-                Sair
-              </a>
+              <form action="{% url 'users:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="nav-link link-dark">
+                  <i class="bi bi-box-arrow-left"></i>
+                  Sair
+                </button>
+              </form>
             </li>
           </ul>
         </nav>
@@ -79,6 +88,7 @@
         <main class="col-md-9 col-lg-10 ml-sm-auto p-md-4 overflow-auto">
           <div class="container mt-4">
             {% block content %}
+
             {% endblock %}
           </div>
         </main>

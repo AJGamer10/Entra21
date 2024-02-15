@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load phone_filter %}
 {% load static %}
+{% load quantity_filter %}
 {% block title %}
-  Fornecedores
+  Produtos
 {% endblock %}
 {% block head %}
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
@@ -66,6 +66,7 @@
           <th>Foto</th>
           <th>Nome</th>
           <th>Categoria</th>
+          <th>Quantidade em estoque</th>
           <th>Preço de venda</th>
           <th>Data de expiração</th>
           <th>Ativo</th>
@@ -85,6 +86,13 @@
             </td>
             <td>{{ product.name|title|truncatechars:20 }}</td>
             <td>{{ product.category.name|title|default:"Sem categoria" }}</td>
+            <td>
+              {% for inventory in product_inventory %}
+                {% if product == inventory.product %}
+                  {{ inventory.quantity|format_quantity }}
+                {% endif %}
+              {% endfor %}
+            </td>
             <td>R$ {{ product.sale_price|floatformat:2 }}</td>
             <td>
               {% if product.is_perishable %}
@@ -109,7 +117,7 @@
           </tr>
           {% empty %}
           <tr>
-            <td colspan="8" class="text-center">Nenhum produto cadastrado.</td>
+            <td colspan="9" class="text-center">Nenhum produto cadastrado.</td>
           </tr>
         {% endfor %}
       </tbody>

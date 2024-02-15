@@ -42,6 +42,7 @@
         </div>
       </div>
 
+      
       <div class="row mb-3">
         <div class="col">
           {{ form.photo|as_crispy_field }}
@@ -62,7 +63,11 @@
             </div>
             <div class="col-md-2">
               <div class="d-grid">
-                <button type="button" class="btn btn-danger remove-btn">
+                <button
+                  {% if supplier.id.value %}data-url="{% url "products:delete_supplier" supplier.id.value %}"{% endif %}
+                  type="button" 
+                  class="btn btn-danger remove-btn"
+                >
                   <i class="bi bi-x"></i>
                 </button>
               </div>
@@ -73,6 +78,36 @@
 
       <div class="d-grid mb-3">
         <button type="button" id="addSupplierButton" class="btn btn-outline-secondary">Adicionar fornecedor</button>
+      </div>
+
+      <h3>Estoque</h3>
+      <div id="inventoryFormset">
+        {{ product_inventory_formset.management_form }}
+        {% for inventory in product_inventory_formset %}
+          <div class="row mb-3">
+            <div class="col-md-5">
+              {{ inventory.quantity|as_crispy_field }}
+            </div>
+            <div class="col-md-5">
+              {{ inventory.local|as_crispy_field }}
+            </div>
+            <div class="col-md-2">
+              <div class="d-grid">
+                <button
+                  {% if inventory.local.value %}data-url="{% url "products:delete_inventory" inventory.local.value %}"{% endif %}
+                  type="button" 
+                  class="btn btn-danger remove-btn"
+                >
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="d-grid mb-3">
+        <button type="button" id="addInventoryButton" class="btn btn-outline-secondary">Adicionar estoque</button>
       </div>
 
       <div class="row mb-3">
